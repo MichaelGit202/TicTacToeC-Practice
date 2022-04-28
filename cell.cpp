@@ -1,18 +1,35 @@
 #include "cell.h"
 using namespace std;
 
+
 string cell::getState() {
-	switch (state)
+	switch (this->state)  //this warning literally means nothing
 	{
 	case X:
-		return "joe";
+		return " X ";
 	case O:
-		return "mom";
+		return " O ";
 	case E:
-		return "ma";
+		return "   ";
 	default:
-		return "nosout";
+		return "   ";
 	}
 	
+
+}
+
+void cell::setState() {
+	switch (this->state)  //this warning literally means nothing
+	{
+	case X:
+		state = this-> X;
+	case O:
+		 " O ";
+	case E:
+		 "   ";
+	default:
+		 "   ";
+	}
+
 
 }

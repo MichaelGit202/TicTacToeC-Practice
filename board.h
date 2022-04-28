@@ -1,10 +1,11 @@
 #pragma once
-#include "NCell.h";
+#include "cell.h";
 #include <vector>
 class board
 {
 	private: 
-		 vector<NCell> tiles;
+		vector<cell>tiles[9];
+		board();
 
 	public:
 		string getCell(int x, int y);

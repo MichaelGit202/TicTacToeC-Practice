@@ -5,12 +5,13 @@ class cell
 {
   private:
       enum states {
-       X,O,E
+       E,X,O
       };
 
-      states state;
+      states state = E;
 
   public:
       string getState();
+      void setState();
 };
 
