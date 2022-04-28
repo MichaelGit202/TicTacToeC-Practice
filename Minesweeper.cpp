@@ -1,10 +1,10 @@
 #include <iostream>
 #include "JOEBIDEN.h"
-#include <vector>
+
 using namespace std;
 
 int main()
-{
+{   /*
     //joe biden related content, ignore pls
     JOEBIDEN joe;
     cout << "joes favorite number: ";
@@ -20,7 +20,10 @@ int main()
     for (int x = 0; x < joes.size(); x++) {
         cout << joes[x].favNum();
     }
+    */
+
     
+
 
 
 

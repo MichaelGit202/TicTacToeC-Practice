@@ -139,13 +139,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="board.cpp" />
     <ClCompile Include="cell.cpp" />
     <ClCompile Include="JOEBIDEN.cpp" />
     <ClCompile Include="Minesweeper.cpp" />
+    <ClCompile Include="NCell.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="board.h" />
     <ClInclude Include="cell.h" />
     <ClInclude Include="JOEBIDEN.h" />
+    <ClInclude Include="NCell.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
