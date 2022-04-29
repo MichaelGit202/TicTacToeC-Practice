@@ -12,6 +12,6 @@ class cell
 
   public:
       string getState();
-      void setState();
+      void setState(int set);
 };
 

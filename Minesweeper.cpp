@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {   /*
-    //joe biden related content, ignore pls
+    /////joe biden related content, ignore pls////
     JOEBIDEN joe;
     cout << "joes favorite number: ";
     cout << joe.favNum() << endl;
@@ -24,12 +24,22 @@ int main()
     */
 
     board board;
+    cout << board.getCell(0, 1) << endl;
+    board.setCell(0, 1, 1);
+    cout << board.getCell(0, 1) << endl;
+    
 
+    board.printBoard();
 
+    bool win = false;
 
+    cout << "Welcome to c++ minesweeper, use coordinates to pick a spot, you are figting a random function";
 
-
-
+    ///while(win == false) {
+     //    cout << "select an x coordinate"
+         
+    
+   // }
     
 }
 

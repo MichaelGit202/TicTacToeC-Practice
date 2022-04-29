@@ -4,12 +4,13 @@
 class board
 {
 	private: 
-		vector<cell>tiles[9];
-		board();
+		vector<vector<cell>>tiles;
 
 	public:
 		string getCell(int x, int y);
-		void setCell(int x, int y, string value);
+		void setCell(int x, int y, int player);
+		board();
+		void printBoard();
 
 };
 
