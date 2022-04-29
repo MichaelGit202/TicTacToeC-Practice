@@ -8,10 +8,10 @@ class cell
        E,X,O
       };
 
-      states state = E;
+      states state = E; //quiet
 
   public:
       string getState();
-      void setState(int set);
+      void setState(int set); 
 };
 

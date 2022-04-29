@@ -12,10 +12,6 @@ board::board() {
 		}
 			tiles.push_back(newVec);
 	}
-	
-	cout << tiles.size() << endl;
-
-
 }
 
 
@@ -23,8 +19,15 @@ string board::getCell(int x, int y) {
 	return this->tiles[y][x].getState();
 }
 
-void board::setCell(int x, int y, int player) {
-	tiles[y][x].setState(player);
+int board::setCell(int x, int y, int player) {
+	if (tiles[y][x].getState() == "E") {
+		tiles[y][x].setState(player);
+		return 0;
+	}
+	else {
+		return -1;
+	
+	}
 }
 
 void board::printBoard() {
@@ -36,8 +39,8 @@ void board::printBoard() {
 		for (cell c : v) {
 			cout << c.getState() + " | ";
 		}
-		cout << endl;
-		cout << "-------------" << endl;
+	cout << endl;
+	cout << "-------------" << endl;
 	}
 
 

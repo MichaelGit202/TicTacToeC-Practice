@@ -8,7 +8,7 @@ class board
 
 	public:
 		string getCell(int x, int y);
-		void setCell(int x, int y, int player);
+		int setCell(int x, int y, int player);
 		board();
 		void printBoard();
 
