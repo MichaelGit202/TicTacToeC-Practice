@@ -36,7 +36,6 @@ int player::getPlayerNum() {
 
 
 
-
 int player::random(int min, int max) {
 
     static bool first = true;

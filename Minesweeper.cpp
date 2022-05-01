@@ -42,16 +42,24 @@ int main()
     player playerTwo(1, true);
     vector<player> players;
     players.push_back(playerOne);
-    players.push_back(playerTwo);
+   // players.push_back(playerTwo);
 
     while (win == false) {
         for (player pl : players) {
             cout << "player "; cout << pl.getPlayerNum(); cout << "'s turn" << endl;
             playerTurn(board, pl);
+
+            if (board.getWin() == true) {
+                win == true;
+                break;
+            }
         }
     }
 
-    
+    cout << "player: ";
+    cout << board.getWinner().getPlayerNum();
+    cout << " has won";
+       
 }
 
 
@@ -75,7 +83,6 @@ int main()
 
 void playerTurn(board &board, player &player) {
     int pick = -1;
-
     do{
 
         pick  = board.pickCell(player);

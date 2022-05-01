@@ -21,7 +21,7 @@ string board::getCell(int x, int y) {
 
 int board::setCell(int x, int y, int player) {	
 	
-	if (x > -1 && x > -1 && y < tiles.size() && x < tiles[0].size() - 1 && y < tiles.size() - 1
+	if (x > -1 && x > -1 && y < tiles.size() && x < tiles[0].size() && y < tiles.size()
 		&& tiles[y][x].getState() == " ")
 	{
 		tiles[y][x].setState(player);
@@ -34,10 +34,12 @@ int board::setCell(int x, int y, int player) {
 
 
 int board::pickCell(player& player) {
-    int* select = player.pick();
-	winningMove(select[0], select[1],player);
-	//winningMove(select[0], select[1], player); //this is not ok because it sends the pointer for whatever reason
-	return this->setCell(select[0], select[1], player.getPlayerNum());	//but it works here?, I think its because the other one 
+    int* select = player.pick();		//this contains pointers that it passes onto a varible
+	int x = select[0];	//pass the pointer onto x & y
+	int y = select[1];
+	this->setWinner(winningMove(x, y,player));
+	//winningMove(select[0], select[1], player); //this is not ok because it sends the pointer but does not retain it
+	return this->setCell(x, y, player.getPlayerNum());	//but it works here?, I think its because the other one 
 }																		//returns to here
 
 int* board::getSize() {
@@ -46,11 +48,23 @@ int* board::getSize() {
 }
 
 
-void board::setWinner(player& player) {
+void board::setWinner(player player) {
 	this->winner = player;
+	this->win == true;
+
 }
 
-int board::winningMove(int x, int y , player player) {
+bool board::getWin() {
+	return this->win;
+}
+
+player board::getWinner() {
+	return this->winner;
+}
+
+
+
+player board::winningMove(int x, int y , player player) {
 	//check all around x,y for player symbol and if found check in that same
 	//direction for 1 more player symbol
 
@@ -63,22 +77,43 @@ int board::winningMove(int x, int y , player player) {
 	}										//playernum should look like
 
 	int* max = this->getSize(); //y, x
-
-
+	int maxX = max[0];
+	int maxY = max[1];
+	cout << (x < maxY) << endl;
+	
 	//sometimes you just wana make a lot of if's with only 2 ifs
 	vector<vector<int>> instructions = { {-1,-1},{-1,0},{0,-1},{-1,1},{1,-1},{0,1},{1,0},{1,1} };
 	for (vector<int> i : instructions)
 	{
 		//eye vomit
-		if ( x  - i[1] > 0 &&  y  - i[0] > 0 &&  x  < max[1] - i[1] &&  y  < max[0] - i[0] && tiles[ y  - i[0]][ x  - i[1]].getState() == plState) {
-			if ( x  - (i[1]* 2) > 0 &&  y - (i[0] * 2) > 0 &&  y < max[1] - (i[1] * 2) &&  y < max[0] - (i[0] * 2) && tiles[ y  - (i[0] * 2)][ x  - (i[1] * 2)].getState() == plState) {
-				cout << "yea you won" << endl;
-				//return true;
+		if ( x  + i[1] > -1 &&
+			y  + i[0] > -1 &&
+			x + i[1] < maxY &&
+			y + i[0] < maxX &&
+			tiles[ y  + i[0]][ x  + i[1]].getState() == plState){
+
+
+			if (x + (i[1] * 2) > -1 &&
+				y + (i[0] * 2) > -1 &&
+				x + (i[1] * 2) < maxY &&
+				y + (i[0] * 2) < maxX &&
+				tiles[y + (i[0] * 2)][x + (i[1]* 2)].getState() == plState) {
+				return player;
 			}
+
+			if (x - i[1] > -1 &&
+				y - i[0] > -1 &&
+				x - i[1] < maxY &&
+				y - i[0] < maxX &&
+				tiles[y - i[0]][x - i[1]].getState() == plState) {
+				return player;
+			}
+
+
 		}
 	}
 
-	return false;
+	return NULL;
 }
 
 void board::printBoard() {
