@@ -37,7 +37,7 @@ int board::pickCell(player& player) {
     int* select = player.pick();		//this contains pointers that it passes onto a varible
 	int x = select[0];	//pass the pointer onto x & y
 	int y = select[1];
-	this->setWinner(winningMove(x, y,player));
+	winningMove(x, y,player);
 	//winningMove(select[0], select[1], player); //this is not ok because it sends the pointer but does not retain it
 	return this->setCell(x, y, player.getPlayerNum());	//but it works here?, I think its because the other one 
 }																		//returns to here
@@ -50,8 +50,7 @@ int* board::getSize() {
 
 void board::setWinner(player player) {
 	this->winner = player;
-	this->win == true;
-
+	this->win = true;
 }
 
 bool board::getWin() {
@@ -98,6 +97,8 @@ player board::winningMove(int x, int y , player player) {
 				x + (i[1] * 2) < maxY &&
 				y + (i[0] * 2) < maxX &&
 				tiles[y + (i[0] * 2)][x + (i[1]* 2)].getState() == plState) {
+				setWinner(player);
+				cout << "win from block 1" << endl;
 				return player;
 			}
 
@@ -106,6 +107,8 @@ player board::winningMove(int x, int y , player player) {
 				x - i[1] < maxY &&
 				y - i[0] < maxX &&
 				tiles[y - i[0]][x - i[1]].getState() == plState) {
+				setWinner(player);
+				cout << "win from block 2" << endl;
 				return player;
 			}
 

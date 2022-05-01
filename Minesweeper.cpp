@@ -6,6 +6,9 @@ bool checkwin(board& board, player& player);
 
 using namespace std;
 
+//to do 
+//make expandible - mabey if I care enough 
+
 int main()
 {   /*
     /////joe biden related content, ignore pls////
@@ -25,16 +28,14 @@ int main()
     }
     */
 
-    board board;
+ 
     // cout << board.getCell(0, 1) << endl;
     //board.setCell(0, 1, 1);
     //cout << board.getCell(0, 1) << endl;
     
-
+     board board;
 
     bool win = false;
-    
-     //picks a spot succsesfully
     cout << "Welcome to c++ minesweeper, use coordinates to pick a spot, you are figting a random function" << endl;
 
     board.printBoard();
@@ -42,15 +43,15 @@ int main()
     player playerTwo(1, true);
     vector<player> players;
     players.push_back(playerOne);
-   // players.push_back(playerTwo);
+    players.push_back(playerTwo);
 
     while (win == false) {
         for (player pl : players) {
             cout << "player "; cout << pl.getPlayerNum(); cout << "'s turn" << endl;
             playerTurn(board, pl);
 
-            if (board.getWin() == true) {
-                win == true;
+            if (board.getWin()) {
+                win = true;
                 break;
             }
         }
@@ -63,21 +64,6 @@ int main()
 }
 
 
-//bool checkwin(board &board, player &player) {
-    //int* sz[2] = { board.getSize() };
-    // 
-    //for (int* i = 0; i < sz[0]; i++)
-    //{
-    //    for (int* j = 0; i < sz[1]; i++)
-    //    {
-    //
-    //    }
-    //
-    //}
-    
-
-
-//}
 
 
 
