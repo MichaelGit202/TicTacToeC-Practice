@@ -1,6 +1,8 @@
 #include <iostream>
 #include "JOEBIDEN.h"
 #include "board.h"
+void playerTurn(board& board, player& player);
+bool checkwin(board& board, player& player);
 
 using namespace std;
 
@@ -31,48 +33,60 @@ int main()
 
 
     bool win = false;
-    int x, y = 0;
+    
      //picks a spot succsesfully
     cout << "Welcome to c++ minesweeper, use coordinates to pick a spot, you are figting a random function" << endl;
 
     board.printBoard();
+    player playerOne(0);
+    player playerTwo(1, true);
+    vector<player> players;
+    players.push_back(playerOne);
+    players.push_back(playerTwo);
 
     while (win == false) {
-        cout << "pick a space" << endl;
-        cout << "select a X coordinate: " << endl;
-        cin >> x;
-        cout << "select a Y coordinate: " << endl;
-        cin >> y;
-        playerTurn(0, x, y, board);
-        playerTurn(1, random(0,3), random(0,3), board);
-
+        for (player pl : players) {
+            cout << "player "; cout << pl.getPlayerNum(); cout << "'s turn" << endl;
+            playerTurn(board, pl);
+        }
     }
 
     
 }
 
 
-void playerTurn(int player, int x, int y, board &board) {
+//bool checkwin(board &board, player &player) {
+    //int* sz[2] = { board.getSize() };
+    // 
+    //for (int* i = 0; i < sz[0]; i++)
+    //{
+    //    for (int* j = 0; i < sz[1]; i++)
+    //    {
+    //
+    //    }
+    //
+    //}
+    
+
+
+//}
+
+
+
+void playerTurn(board &board, player &player) {
     int pick = -1;
 
     do{
 
-        pick  = board.setCell(y - 1, x - 1, 0);
+        pick  = board.pickCell(player);
         if (pick == -1) {
-            cout << x + ", " + y; cout << "is not a valid input" << endl;
+            cout << "That is not a valid input try again" << endl;
 
         }
-    }while(pick = - 1);
+
+    }while(pick == -1);
     board.printBoard();
 }
 
 
-int random(int min, int max) {
-    static bool first = true;
-    if (first) {
-        srand(time(NULL));
-        first = false;
-    }
 
-    return min + rand() % ((max + 1) - min);
-}

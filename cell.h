@@ -5,10 +5,10 @@ class cell
 {
   private:
       enum states {
-       E,X,O
+       E,X,O,B
       };
 
-      states state = E; //quiet
+      states state = E;
 
   public:
       string getState();

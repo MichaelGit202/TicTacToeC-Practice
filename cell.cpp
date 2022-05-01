@@ -1,4 +1,5 @@
 #include "cell.h"
+#include <iostream>
 using namespace std;
 
 
@@ -11,6 +12,8 @@ string cell::getState() {
 		return "O";
 	case E:
 		return " ";
+	case B:
+		return "?"; //for errors
 	default:
 		return " ";
 	}
@@ -19,12 +22,18 @@ string cell::getState() {
 }
 
 void cell::setState(int set) {	
-	switch (set)  //this warning literally means nothing
+	
+	switch (set) 
 	{
 	case 0:
 		this->state = X;
+		break;
 	case 1:
 		this->state = O;
+		break;
+	default:
+		this->state = B;
+		break;
 	}
 
 }
