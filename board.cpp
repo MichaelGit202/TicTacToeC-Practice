@@ -4,9 +4,9 @@ using namespace std;
 
 board::board() {
 
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 10; i++) {
 		vector<cell> newVec;
-		for (int j = 0; j < 3; j++) {
+		for (int j = 0; j < 10; j++) {
 			cell newCell;
 			newVec.push_back(newCell);
 		}
@@ -19,16 +19,18 @@ string board::getCell(int x, int y) {
 	return this->tiles[y][x].getState();
 }
 
-int board::setCell(int x, int y, int player) {	
+bool board::setCell(int x, int y, int player) {	
+
 	
-	if (x > -1 && x > -1 && y < tiles.size() && x < tiles[0].size() && y < tiles.size()
-		&& tiles[y][x].getState() == " ")
+	
+	if (x > -1 && y > -1 && y < tiles.size() && x < tiles[0].size() && y < tiles.size()
+		&& tiles[y][x].getState() == " " && tiles[y][x].getState() != "X" && tiles[y][x].getState() != "O")
 	{
-		tiles[y][x].setState(player);
-		return 0;
+		this->tiles[y][x].setState(player);
+		return true;
 	}
 	else {
-		return -1;
+		return false;
 	}
 }
 
@@ -37,9 +39,12 @@ int board::pickCell(player& player) {
     int* select = player.pick();		//this contains pointers that it passes onto a varible
 	int x = select[0];	//pass the pointer onto x & y
 	int y = select[1];
-	winningMove(x, y,player);
+	bool setable = this->setCell(x, y, player.getPlayerNum());
+	if (setable) {
+		this->winningMove(x, y, player);
+	}
 	//winningMove(select[0], select[1], player); //this is not ok because it sends the pointer but does not retain it
-	return this->setCell(x, y, player.getPlayerNum());	//but it works here?, I think its because the other one 
+	return setable;	//but it works here?, I think its because the other one 
 }																		//returns to here
 
 int* board::getSize() {
@@ -85,7 +90,7 @@ player board::winningMove(int x, int y , player player) {
 	for (vector<int> i : instructions)
 	{
 		//eye vomit
-		if ( x  + i[1] > -1 &&
+		if ( x + i[1] > -1 &&
 			y  + i[0] > -1 &&
 			x + i[1] < maxY &&
 			y + i[0] < maxX &&
@@ -98,7 +103,6 @@ player board::winningMove(int x, int y , player player) {
 				y + (i[0] * 2) < maxX &&
 				tiles[y + (i[0] * 2)][x + (i[1]* 2)].getState() == plState) {
 				setWinner(player);
-				cout << "win from block 1" << endl;
 				return player;
 			}
 
@@ -108,7 +112,6 @@ player board::winningMove(int x, int y , player player) {
 				y - i[0] < maxX &&
 				tiles[y - i[0]][x - i[1]].getState() == plState) {
 				setWinner(player);
-				cout << "win from block 2" << endl;
 				return player;
 			}
 
@@ -117,6 +120,21 @@ player board::winningMove(int x, int y , player player) {
 	}
 
 	return NULL;
+}
+
+bool board::checkDraw() {
+
+	bool fullFlag = true;
+	for (vector<cell>& v : tiles) {
+		for (cell& c : v) {
+			if (c.getState() == " ") {
+				bool fullFlag = false;
+				return false;
+			}
+		}
+
+	}
+
 }
 
 void board::printBoard() {

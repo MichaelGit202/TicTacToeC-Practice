@@ -20,7 +20,9 @@ public:
 		ai = isAi;
 	}
 		
-		
+	//player(bool isAi) : player(int num) {
+//
+	//}
 		
 };
 

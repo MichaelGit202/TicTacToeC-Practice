@@ -7,7 +7,7 @@ class board
 	private: 
 		bool win = false;
 		vector<vector<cell>>tiles;
-		int setCell(int x, int y, int player);
+		bool setCell(int x, int y, int player);
 		player winner = NULL;
 		player winningMove(int x, int y , player player);
 		void setWinner(player player);
@@ -22,6 +22,7 @@ class board
 		board();
 		void printBoard();
 		int* getSize();
+		bool checkDraw();
 
 };
 

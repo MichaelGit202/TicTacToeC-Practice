@@ -20,8 +20,8 @@ int * player::pick() {
     }
     else {
         cout << "is an ai" << endl;
-        x = random(0, 2);   
-        y = random(0, 2);
+        x = random(0, 9);   
+        y = random(0, 9);
         cout << x; cout << ", "; cout << y << endl;
     }        
     

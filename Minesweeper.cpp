@@ -9,6 +9,9 @@ using namespace std;
 //to do 
 //make expandible - mabey if I care enough 
 
+
+//notes, should have declared cell states in like board
+
 int main()
 {   /*
     /////joe biden related content, ignore pls////
@@ -16,7 +19,7 @@ int main()
     cout << "joes favorite number: ";
     cout << joe.favNum() << endl;
     joe.sayTheLine();
-     
+
     //JOEBIDEN hunter[9] {};
 
     //for(size_t i = 1; i < )
@@ -28,23 +31,23 @@ int main()
     }
     */
 
- 
+
     // cout << board.getCell(0, 1) << endl;
     //board.setCell(0, 1, 1);
     //cout << board.getCell(0, 1) << endl;
-    
-     board board;
+
+    board board;
 
     bool win = false;
     cout << "Welcome to c++ minesweeper, use coordinates to pick a spot, you are figting a random function" << endl;
 
     board.printBoard();
-    player playerOne(0);
+    player playerOne(0, true);
     player playerTwo(1, true);
     vector<player> players;
     players.push_back(playerOne);
     players.push_back(playerTwo);
-
+ 
     while (win == false) {
         for (player pl : players) {
             cout << "player "; cout << pl.getPlayerNum(); cout << "'s turn" << endl;
@@ -54,30 +57,41 @@ int main()
                 win = true;
                 break;
             }
+
+            if (board.checkDraw()) {
+                win = true;
+                break;
+            }
         }
     }
 
-    cout << "player: ";
-    cout << board.getWinner().getPlayerNum();
-    cout << " has won";
-       
+    if (board.getWin()) {
+        cout << "player: ";
+        cout << board.getWinner().getPlayerNum();
+        cout << " has won";
+    }
+    else if (!board.getWin()) {
+        cout << "Draw, you both lose" << endl;
+    }
+
 }
 
 
 
 
 
+
 void playerTurn(board &board, player &player) {
-    int pick = -1;
+    bool pick = false;
     do{
 
         pick  = board.pickCell(player);
-        if (pick == -1) {
+        if (!pick) {
             cout << "That is not a valid input try again" << endl;
 
         }
 
-    }while(pick == -1);
+    }while(!pick);
     board.printBoard();
 }
 
