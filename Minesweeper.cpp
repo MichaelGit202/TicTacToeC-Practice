@@ -49,7 +49,7 @@ int main()
     player playerTwo(1, size, true);
     vector<player> players;
     players.push_back(playerOne);
-    //players.push_back(playerTwo);
+    players.push_back(playerTwo);
  
     while (win == false) {
         for (player pl : players) {
@@ -70,8 +70,8 @@ int main()
 
     if (board.getWin()) {
         cout << "player: ";
-      //  player& winner = board.getWinner();
-       // cout << winner.getPlayerNum();
+        player* winner = board.getWinner();
+        cout << winner->getPlayerNum();
         cout << " has won";
     }
     else if (!board.getWin()) {

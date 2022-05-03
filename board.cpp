@@ -104,7 +104,7 @@ player* board::winningMove(int x, int y , player Player) {
 				x + (i[1] * 2) < maxY &&
 				y + (i[0] * 2) < maxX &&
 				tiles[y + (i[0] * 2)][x + (i[1]* 2)].getState() == plState) {
-				setWinner(&Player);
+				setWinner(Player);
 				return &Player;
 			}
 
