@@ -8,18 +8,18 @@ class board
 		bool win = false;
 		vector<vector<cell>>tiles;
 		bool setCell(int x, int y, int player);
-		player winner = NULL;
-		player winningMove(int x, int y , player player);
-		void setWinner(player player);
+		player* winner;
+		player* winningMove(int x, int y , player player);
+		void setWinner(player* player);
 
 	public:
 			//giving the board the ability to check for a winner may be excessive
 			//however I already print with it so idk
 		bool getWin();
-		player getWinner();
+		player* getWinner();
 		string getCell(int x, int y);
 		int pickCell(player &player);
-		board();
+		board(int size);
 		void printBoard();
 		int* getSize();
 		bool checkDraw();

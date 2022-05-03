@@ -2,11 +2,13 @@
 #include <iostream>
 using namespace std;
 
-board::board() {
+board::board(int size) {
+	player* p = winner;
+	p = NULL;
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < size; i++) {
 		vector<cell> newVec;
-		for (int j = 0; j < 10; j++) {
+		for (int j = 0; j < size; j++) {
 			cell newCell;
 			newVec.push_back(newCell);
 		}
@@ -53,7 +55,7 @@ int* board::getSize() {
 }
 
 
-void board::setWinner(player player) {
+void board::setWinner(player* player) {
 	this->winner = player;
 	this->win = true;
 }
@@ -62,21 +64,21 @@ bool board::getWin() {
 	return this->win;
 }
 
-player board::getWinner() {
+player* board::getWinner() {
 	return this->winner;
 }
 
 
 
-player board::winningMove(int x, int y , player player) {
+player* board::winningMove(int x, int y , player Player) {
 	//check all around x,y for player symbol and if found check in that same
 	//direction for 1 more player symbol
 
 	string plState = "";
-	if (player.getPlayerNum() == 0) {	//had to do this jank
+	if (Player.getPlayerNum() == 0) {	//had to do this jank
 		plState = "X";					//because this is defined on a cell
 	}									//level only, ie the player object
-	else if (player.getPlayerNum() == 1) {	//does not know what it is other than player num
+	else if (Player.getPlayerNum() == 1) {	//does not know what it is other than player num
 		plState = "O";						//and cell is the only interpreter for what each
 	}										//playernum should look like
 
@@ -102,8 +104,8 @@ player board::winningMove(int x, int y , player player) {
 				x + (i[1] * 2) < maxY &&
 				y + (i[0] * 2) < maxX &&
 				tiles[y + (i[0] * 2)][x + (i[1]* 2)].getState() == plState) {
-				setWinner(player);
-				return player;
+				setWinner(&Player);
+				return &Player;
 			}
 
 			if (x - i[1] > -1 &&
@@ -111,15 +113,17 @@ player board::winningMove(int x, int y , player player) {
 				x - i[1] < maxY &&
 				y - i[0] < maxX &&
 				tiles[y - i[0]][x - i[1]].getState() == plState) {
-				setWinner(player);
-				return player;
+				setWinner(&Player);
+				return &Player;
 			}
 
 
 		}
 	}
 
-	return NULL;
+	player *p = winner;
+	p = NULL;
+	return p;
 }
 
 bool board::checkDraw() {

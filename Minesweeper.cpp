@@ -36,17 +36,20 @@ int main()
     //board.setCell(0, 1, 1);
     //cout << board.getCell(0, 1) << endl;
 
-    board board;
+    int size;
+    cout << "size of the board" << endl;
+    cin >> size; 
+    board board(size);
 
     bool win = false;
     cout << "Welcome to c++ minesweeper, use coordinates to pick a spot, you are figting a random function" << endl;
 
     board.printBoard();
-    player playerOne(0, true);
-    player playerTwo(1, true);
+    player playerOne(0, size, true);
+    player playerTwo(1, size, true);
     vector<player> players;
     players.push_back(playerOne);
-    players.push_back(playerTwo);
+    //players.push_back(playerTwo);
  
     while (win == false) {
         for (player pl : players) {
@@ -67,7 +70,8 @@ int main()
 
     if (board.getWin()) {
         cout << "player: ";
-        cout << board.getWinner().getPlayerNum();
+      //  player& winner = board.getWinner();
+       // cout << winner.getPlayerNum();
         cout << " has won";
     }
     else if (!board.getWin()) {
