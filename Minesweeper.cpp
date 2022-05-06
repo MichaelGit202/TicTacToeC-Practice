@@ -45,6 +45,20 @@ int main()
     cout << "Welcome to c++ minesweeper, use coordinates to pick a spot, you are figting a random function" << endl;
 
     board.printBoard();
+
+    //cout << "Enter 0 for default or any posative number for ammount of players" << endl;
+    //int amPl;
+     //cin >> amPl;
+
+
+    //for (int i = 0; i < amPl; i++) {
+     //    cout << "is this an ai" << endl;
+     //    string rsp = "";
+    //     cin >> rsp;
+
+   //  }
+
+
     player playerOne(0, size, true);
     player playerTwo(1, size, true);
     vector<player> players;

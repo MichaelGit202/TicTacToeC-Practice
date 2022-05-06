@@ -104,7 +104,7 @@ player* board::winningMove(int x, int y , player Player) {
 				x + (i[1] * 2) < maxY &&
 				y + (i[0] * 2) < maxX &&
 				tiles[y + (i[0] * 2)][x + (i[1]* 2)].getState() == plState) {
-				setWinner(Player);
+				setWinner(&Player);
 				return &Player;
 			}
 
@@ -143,16 +143,26 @@ bool board::checkDraw() {
 
 void board::printBoard() {
 	
-	cout << "-------------" << endl;
+	for (int i = 0; i < tiles[0].size(); i++) {
+		cout << "----";
+	}
+
+	cout << endl;
 
 	for (vector<cell>& v : tiles) {
 		cout << "| ";
 		for (cell& c : v) {
 			cout << c.getState() + " | ";
 		}
+		cout << endl;
+
+	for (int i = 0; i < tiles[0].size(); i++) {
+			cout << "----";
+		}
 	cout << endl;
-	cout << "-------------" << endl;
+	
 	}
+
 
 
 }
